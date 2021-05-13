@@ -3,7 +3,7 @@ import Stack from './logic/MaxStack';
 
 const Row = (number, index) => (
     <tr key={index}>
-        <td>{number}</td>
+        <td>{number.toString()}</td>
     </tr>
 );
 
@@ -13,6 +13,7 @@ class MaxStackComponent extends React.Component {
         super(props);
         this.state = {
             value: "",
+            max: "",
             stack: new Stack(),
             values: []
         };
@@ -20,23 +21,23 @@ class MaxStackComponent extends React.Component {
 
     refreshValues() {
         let values = [];
-        for(let current = this.state.stack.top; current; current = current.next) {
-            console.log("Adding value: " + current.value);
+        for(let current = this.state.stack.top(); current; current = current.next) {
             values.push(current.value);
         }
         this.setState({
-            values: values
+            values: values,
+            max: this.state.stack.max()
         });
     }
 
     onClickPush() {
-        this.state.stack.push(this.state.value);
+        this.state.stack.push(new Number(this.state.value));
         this.refreshValues();
     }
     
     onClickPop() {
         this.setState({
-            value: this.state.stack.pop().value
+            value: this.state.stack.pop().toString()
         });
         this.refreshValues();
     }
@@ -48,13 +49,13 @@ class MaxStackComponent extends React.Component {
                     <div className="form-group row">
                         <label htmlFor="nodeValue" className="col-sm-2 col-form-label">Value:</label>
                         <div className="col-sm-10">
-                            <input type="text" className="form-control" id="nodeValue" placeholder="42" onChange={event => this.state.value = event.target.value }></input>
+                            <input type="text" className="form-control" id="nodeValue" placeholder="42" onChange={event => this.setState({value: event.target.value}) }></input>
                         </div>
                     </div>
                     <div className="form-group row">
                         <label htmlFor="max" className="col-sm-2 col-form-label">Max:</label>
                         <div className="col-sm-10">
-                            <input type="text" readOnly className="form-control-plaintext" id="max"></input>
+                            <input type="text" readOnly className="form-control-plaintext" value={this.state.max} id="max"></input>
                         </div>
                     </div>
                 </form>
@@ -77,16 +78,3 @@ class MaxStackComponent extends React.Component {
 }
 
 export default MaxStackComponent;
-
-/*
-Value: |       |
-Max:   #
-[Push] [Pop]
--- Stack -----------------------
-2
---------------------------------
-4
---------------------------------
-7
---------------------------------
-*/

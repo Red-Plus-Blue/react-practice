@@ -9,29 +9,36 @@ const Node = class {
 const Stack = class {
 
     constructor() {
-        this.top = null;
-        this.max = null;
+        this._top = null;
+        this._max = null;
     }
 
     push(value) {
-        let node = new Node(value, this.top);
-        this.top = node;
+        let node = new Node(value, this._top);
+        this._top = node;
 
-        let maxValue = (this.max && this.max.value >= value) ? this.max.value : value;
-        let maxNode = new Node(maxValue, this.max);
-        this.max = maxNode;
+        let maxValue = ((!!this._max) && (this._max.value >= value)) ? this._max.value : value;
+        let maxNode = new Node(maxValue, this._max);
+        this._max = maxNode;
+    }
+
+    top() {
+        return this._top;
     }
 
     pop() {
-        if(!this.top) { return null; }
+        if(!this._top) { return null; }
 
-        let value = this.top.value;
-        this.top = this.top.next;
+        let value = this._top.value;
+        this._top = this._top.next;
+
+        this._max = this._max.next;
+
         return value;
     }
 
     max() {
-        return this.max.value;
+        return this._max.value;
     }
 };
 
