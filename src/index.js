@@ -7,6 +7,7 @@ import App from './App';
 import RomanNumeralComponent from './RomanNumeralComponent';
 import MaxStackComponent from './MaxStackComponent';
 import { Route, Link, BrowserRouter, Redirect } from 'react-router-dom';
+import AnagramsComponent from './AnagramsComponent';
 
 const routes = (
     <BrowserRouter>
@@ -17,6 +18,7 @@ const routes = (
             <Route path="/app" component={App} />
             <Route path="/roman-numerals" component={RomanNumeralComponent} />
             <Route path="/max-stack" component={MaxStackComponent} />
+            <Route path="/anagrams" component={AnagramsComponent} />
         </div>
     </BrowserRouter>
 );
