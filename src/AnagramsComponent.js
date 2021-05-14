@@ -41,7 +41,7 @@ class AnagramsComponent extends React.Component {
                         </div>
                     </div>
                 </form>
-                <div className={alertClasses} role="alert">
+                <div id="result" className={alertClasses} role="alert">
                     {alertText}
                 </div>
             </div>
