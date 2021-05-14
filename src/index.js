@@ -4,10 +4,12 @@ import './index.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 
 import App from './App';
+import { Route, Link, BrowserRouter, Redirect } from 'react-router-dom';
+
 import RomanNumeralComponent from './RomanNumeralComponent';
 import MaxStackComponent from './MaxStackComponent';
-import { Route, Link, BrowserRouter, Redirect } from 'react-router-dom';
 import AnagramsComponent from './AnagramsComponent';
+import StringCompressionComponent from './StringCompressionComponent';
 
 const routes = (
     <BrowserRouter>
@@ -19,6 +21,7 @@ const routes = (
             <Route path="/roman-numerals" component={RomanNumeralComponent} />
             <Route path="/max-stack" component={MaxStackComponent} />
             <Route path="/anagrams" component={AnagramsComponent} />
+            <Route path="/string-compression" component={StringCompressionComponent} />
         </div>
     </BrowserRouter>
 );
